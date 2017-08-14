@@ -1,6 +1,5 @@
 package PharmacyProject.co.za.services;
 
-import PharmacyProject.co.za.domains.Patient;
 import PharmacyProject.co.za.domains.PatientCondition;
 
 /**
@@ -9,9 +8,9 @@ import PharmacyProject.co.za.domains.PatientCondition;
 public interface PatientConditionService {
     PatientCondition create(PatientCondition patientCondition);
 
-    PatientCondition read(Patient patientId);
+    PatientCondition read(String patientId);
 
     PatientCondition update(PatientCondition patientCondition);
 
-    void delete(Patient patientId);
+    void delete(String patientId);
 }

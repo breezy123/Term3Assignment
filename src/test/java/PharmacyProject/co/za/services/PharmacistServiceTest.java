@@ -20,6 +20,7 @@ public class PharmacistServiceTest {
     Map<String,String> value;
     @BeforeMethod
     public void setUp() throws Exception {
+
         service = new PharmacistServiceImpl();
         value = new HashMap<String, String>();
         value.put("pharmacistID","MTL7263");
@@ -30,12 +31,13 @@ public class PharmacistServiceTest {
     @Test
     public void testCreate() throws Exception {
         Pharmacist pharmacist = PharmacistFactory.getPharmacist(value);
+        service.create(pharmacist);
         assertEquals("MTL7263",pharmacist.getPharmacistID());
     }
 
     @Test(dependsOnMethods = "testCreate")
     public void testRead() throws Exception {
-        Pharmacist pharmacist1 = service.read("");
+        Pharmacist pharmacist1 = service.read("MTL7263");
         assertEquals("MTL7263",pharmacist1.getPharmacistID());
     }
 

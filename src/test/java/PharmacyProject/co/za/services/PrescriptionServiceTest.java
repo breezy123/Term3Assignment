@@ -61,17 +61,19 @@ public class PrescriptionServiceTest {
     public void testCreate() throws Exception {
         Prescription prescriptionObject = PrescriptionFactory.getPrecscription(value,today,
                 "3726QQLLN",patient,pharmacist);
+        service.create(prescriptionObject);
+        assertEquals("3726QQLLN",prescriptionObject.getDoctorId());
     }
 
     @Test(dependsOnMethods = "testCreate")
     public void testRead() throws Exception {
-        Prescription prescription = service.read(4144);
+        Prescription prescription = service.read(9023182);
         assertEquals("3726QQLLN",prescription.getDoctorId());
     }
 
     @Test(dependsOnMethods = "testRead")
     public void testUpdate() throws Exception {
-        Prescription prescription = service.read(4144);
+        Prescription prescription = service.read(9023182);
         Prescription newPrescription =new  Prescription.Builder()
                 .doctorId("3726QQLLN")
                 .patientID(patient)
@@ -80,14 +82,14 @@ public class PrescriptionServiceTest {
                 .build();
 
         service.update(newPrescription);
-        Prescription Update = service.read(4144);
+        Prescription Update = service.read(9023182);
         assertEquals("3726QQLLN",prescription.getDoctorId());
     }
 
     @Test(dependsOnMethods = "testUpdate")
     public void testDelete() throws Exception {
-        service.delete(4144);
-        Prescription prescription =service.read(4144);
+        service.delete(9023182);
+        Prescription prescription =service.read(9023182);
         assertNull(prescription);
     }
 

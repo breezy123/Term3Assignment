@@ -6,6 +6,7 @@ import java.util.*;
  * Created by aubrey on 07/08/2017.
  */
 public class PatientCondition implements Serializable {
+
     private Patient patientId;
     private Condition conditionId;
     private Date dateDiagnosed;
@@ -31,16 +32,18 @@ public class PatientCondition implements Serializable {
         this.conditionId = build.conditionId;
         this.dateDiagnosed = build.dateDiagnosed;
     }
+
     public static class Builder{
+
         private Patient patientId;
         private Condition conditionId;
         private Date dateDiagnosed;
 
-        public Builder patientId(Patient value){
+        public Builder patientIdentity(Patient value){
             this.patientId = value;
             return this;
         }
-        public Builder conditionId(Condition value){
+        public Builder conditionIdentity(Condition value){
             this.conditionId = value;
             return this;
         }

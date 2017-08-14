@@ -15,9 +15,10 @@ public class PrescriptionFactory {
         Prescription prescriptionID = new Prescription();
 
         Prescription prescription = new Prescription.Builder()
+
                 .prescriptionID(value.get(prescriptionID.getPrescriptionID()))
                 .prescriptionDate(datedescription)
-                .doctorId("doctorId")
+                .doctorId(doctorID)
                 .patientID(patient)
                 .pharmacistID(pharmacist)
                 .build();

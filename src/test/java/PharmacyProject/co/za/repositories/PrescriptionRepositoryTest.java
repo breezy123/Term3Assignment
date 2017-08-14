@@ -18,8 +18,6 @@ import static org.testng.Assert.assertNull;
 /**
  * Created by aubrey on 08/08/2017.
  */
-
-
 public class PrescriptionRepositoryTest {
     Map<Integer,Integer>value;
     Prescription prescription;
@@ -27,11 +25,13 @@ public class PrescriptionRepositoryTest {
     Patient patient;
     Date today = new Date();
     Prescription prescription1 ;
-    PrescriptionRepositoryImple repositoryI;
+    PrescriptionRepository repositoryI;
 
 
     @BeforeMethod
     public void setUp() throws Exception {
+
+        repositoryI = PrescriptionRepositoryImple.getInstance();
 
         prescription1 = new Prescription();
         pharmacist = new Pharmacist.Builder()
@@ -48,7 +48,7 @@ public class PrescriptionRepositoryTest {
                 .build();
 
         prescription = new Prescription.Builder()
-                .prescriptionID(101114144)
+                .prescriptionID(10111)
                 .prescriptionDate(today)
                 .pharmacistID(pharmacist)
                 .patientID(patient)
@@ -56,25 +56,25 @@ public class PrescriptionRepositoryTest {
                 .build();
 
         value = new HashMap<Integer, Integer>();
-        value.put(prescription1.getPrescriptionID(),9023182);
+        value.put(prescription1.getPrescriptionID(),101114144);
     }
 
     @Test
     public void testCreate() throws Exception {
-        Prescription prescriptionObject = PrescriptionFactory.getPrecscription(value,today,
-                "3726QQLLN",patient,pharmacist);
-        assertEquals("Dicovery",prescriptionObject.getPatientID().getMedicalaidName());
+        Prescription prescriptionObject = PrescriptionFactory.getPrecscription(value,today,"3726QQLLN",patient,pharmacist);
+        repositoryI.create(prescriptionObject);
+        //System.out.println(prescriptionObject.getDoctorId());
+        assertEquals("DCY3892",prescriptionObject.getPatientID().getMedicalaidNumber());
     }
-
     @Test(dependsOnMethods = "testCreate")
     public void testRead() throws Exception {
-        Prescription prescription = repositoryI.read(4144);
-        assertEquals("3726QQLLN",prescription.getDoctorId());
+        Prescription prescriptionObj = repositoryI.read(101114144);
+        System.out.println(prescriptionObj.getDoctorId());
+        assertEquals("3726QQLLN",prescriptionObj.getDoctorId());
     }
-
     @Test(dependsOnMethods = "testRead")
     public void testUpdate() throws Exception {
-        Prescription prescription = repositoryI.read(4144);
+        Prescription prescription = repositoryI.read(101114144);
         Prescription newPrescription =new  Prescription.Builder()
                 .doctorId("3726QQLLN")
                 .patientID(patient)
@@ -83,15 +83,13 @@ public class PrescriptionRepositoryTest {
                 .build();
 
         repositoryI.update(newPrescription);
-        Prescription Update = repositoryI.read(4144);
-        assertEquals("3726QQLLN",prescription.getDoctorId());
+        Prescription updateprescriptions = repositoryI.read(101114144);
+        assertEquals("3726QQLLN",updateprescriptions.getDoctorId());
     }
-
     @Test(dependsOnMethods = "testUpdate")
     public void testDelete() throws Exception {
-        repositoryI.delete(4144);
+        repositoryI.delete(101114144);
         Prescription prescription =repositoryI.read(4144);
         assertNull(prescription);
     }
-
 }

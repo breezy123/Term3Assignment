@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 public class Prescriptionline implements Serializable {
 
-    private Prescription prescriptionID;
     private int lineId;
+    private Prescription prescriptionID;
     private String instructions;
     private Medicine medicineID;
     private double price;
@@ -35,6 +35,15 @@ public class Prescriptionline implements Serializable {
     public double getPrice() {
         return price;
     }
+
+    /*public double taxDue(){
+        return 0.14;
+    }
+
+    public double prescriptionTotal(double quantity){
+        return (price * quantity * taxDue()) + price *quantity;
+    }*/
+
 
     public Prescriptionline(Builder build){
         this.prescriptionID = build.prescriptionID;

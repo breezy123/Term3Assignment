@@ -26,11 +26,15 @@ public class PrescriptionLineServiceTest {
     Date today = new Date();
     Medicine medicine;
     Prescriptionline prescription2;
+    Prescriptionline prescription3;
     PrescriptionLineRepository repository;
 
     @BeforeMethod
     public void setUp() throws Exception {
+
+        prescription3 = new Prescriptionline();
         service = new PrescriptionLineServiceImpl();
+
         patient = new Patient.Builder()
                 .patientId("ABY7382")
                 .patientName("Aubrey")
@@ -68,13 +72,14 @@ public class PrescriptionLineServiceTest {
                 .build();
 
         value = new HashMap<Integer, Integer>();
-        value.put(prescription2.getLineId(),4144);
+        value.put(prescription3.getLineId(),4144);
     }
 
     @Test
     public void testCreate() throws Exception {
         Prescriptionline prescriptionline = PrescriptionLineFactory.getPrescriptionLine(value,prescription,"Once a day",
                 medicine,139.89);
+        service.create(prescriptionline);
         assertEquals("PND39837",prescriptionline.getMedicineID().getMedicineID());
     }
 

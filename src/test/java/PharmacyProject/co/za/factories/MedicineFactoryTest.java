@@ -12,7 +12,7 @@ public class MedicineFactoryTest {
     Map<String,String>value;
     @BeforeMethod
     public void setUp() throws Exception {
-        Medicine medicine = new Medicine();
+        //Medicine medicine = new Medicine();
         value = new HashMap<String, String>();
         value.put("medicineID","PND738");
         value.put("medicineName","Panado");

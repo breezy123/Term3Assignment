@@ -11,13 +11,11 @@ public class Patient implements Serializable {
     private String patientName;
     private String medicalaidName;
     private String medicalaidNumber;
+    //public String getPatientID;
 
     public Patient() {
     }
 
-    public String getPatientID() {
-        return patientID;
-    }
 
     public String getPatientName() {
         return patientName;
@@ -31,13 +29,19 @@ public class Patient implements Serializable {
         return medicalaidNumber;
     }
 
+    public String getPatientID() {
+        return patientID;
+    }
+
     public Patient(Builder build){
+
         this.patientID = build.patientID;
         this.patientName = build.patientName;
         this.medicalaidName = build.medicalaidName;
         this.medicalaidNumber = build.medicalaidNumber;
     }
     public static class Builder{
+
         private String patientID;
         private String patientName;
         private String medicalaidName;

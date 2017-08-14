@@ -9,23 +9,17 @@ import java.util.*;
  */
 public class PatientConditionFactory {
 
-    public static PatientCondition getPatientCondition(Map<Date,Date>value, Condition conditionID,Patient patientID){
+    public static PatientCondition getPatientCondition(Map<Date,Date>value,
+                                                       Condition conditionID,Patient patientObject){
 
         //PatientCondition patientCondition1 = new PatientCondition();
         Date today = new Date();
-        Patient patient = new Patient.Builder()
-                .patientId("patientId")
-                .patientName("patientName")
-                .medicalaidName("medicalaidName")
-                .medicalaidNumber("medicalaidNumber")
-                .build();
 
         PatientCondition patientCondition = new PatientCondition.Builder()
-                .patientId(patientID)
-                .conditionId(conditionID)
+                .patientIdentity(patientObject)
+                .conditionIdentity(conditionID)
                 .dateDiagnosed(value.get(today))
                 .build();
-
 
         return patientCondition;
     }

@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public class PrescriptionLineRepositoryImpl implements PrescriptionLineRepository {
 
+    private Prescriptionline prescriptionlineObj = new Prescriptionline();
     private static PrescriptionLineRepositoryImpl repository=null;
 
     private Map<Integer,Prescriptionline>prescriptionTable;
@@ -26,23 +27,29 @@ public class PrescriptionLineRepositoryImpl implements PrescriptionLineRepositor
     }
 
     public Prescriptionline create(Prescriptionline prescriptionline) {
-        prescriptionTable.put(prescriptionline.getPrescriptionID().getPrescriptionID(),prescriptionline);
-        Prescriptionline savedPrescriptionLine = prescriptionTable.get(prescriptionline.getPrescriptionID());
+        prescriptionTable.put(prescriptionline.getLineId(),prescriptionline);
+        Prescriptionline savedPrescriptionLine = prescriptionTable.get(prescriptionline.getLineId());
         return savedPrescriptionLine;
     }
 
-    public Prescriptionline read(int prescriptionId) {
-        Prescriptionline prescriptionline = prescriptionTable.get(prescriptionId);
+    public Prescriptionline read(int lineID) {
+        Prescriptionline prescriptionline = prescriptionTable.get(lineID);
         return prescriptionline;
     }
 
     public Prescriptionline update(Prescriptionline prescriptionline) {
-        prescriptionTable.put(prescriptionline.getPrescriptionID().getPrescriptionID(),prescriptionline);
-        Prescriptionline savedPrescriptionLine = prescriptionTable.get(prescriptionline.getPrescriptionID());
+        prescriptionTable.put(prescriptionline.getLineId(),prescriptionline);
+        Prescriptionline savedPrescriptionLine = prescriptionTable.get(prescriptionline.getLineId());
         return savedPrescriptionLine;
     }
+    public double taxDue(){
+        return 0.14;
+    }
+    public double prescriptionTotal(int qauntity){
 
-    public void delete(int prescriptionId) {
-        prescriptionTable.remove(prescriptionId);
+        return (prescriptionlineObj.getPrice() * qauntity * taxDue()) + prescriptionlineObj.getPrice() * qauntity;
+    }
+    public void delete(int lineID) {
+        prescriptionTable.remove(lineID);
     }
 }

@@ -51,9 +51,10 @@ public class PrescriptionFactoryTest {
 
     @Test
     public void testGetPrecscription() throws Exception {
+
         Prescription prescriptionObject = PrescriptionFactory.getPrecscription(value,today,
                 "3726QQLLN",patient,pharmacist);
-        assertEquals("Dicovery",prescriptionObject.getPatientID().getMedicalaidName());
+        assertEquals(9023182,prescriptionObject.getPrescriptionID());
     }
 
 }

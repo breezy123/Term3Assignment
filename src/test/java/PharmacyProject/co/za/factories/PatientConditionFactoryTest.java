@@ -7,8 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.testng.Assert.assertEquals;
 /**
@@ -18,14 +17,17 @@ public class PatientConditionFactoryTest {
     Map<Date,Date>value;
 
     Date today = new Date();
+
     Condition condition;
     Patient patient;
     PatientCondition patientCondition;
-    Patient patientObject;
+    PatientCondition patientConditionObject;
+
+    ///Patient patientObject;
 
     @BeforeMethod
     public void setUp() throws Exception {
-        patientObject = new Patient();
+        patientConditionObject = new PatientCondition();
 
         patient = new Patient.Builder()
                 .patientId("ABLW9828")
@@ -41,22 +43,20 @@ public class PatientConditionFactoryTest {
                 .build();
 
         patientCondition = new PatientCondition.Builder()
-                .patientId(patient)
-                .conditionId(condition)
+                .patientIdentity(patient)
+                .conditionIdentity(condition)
                 .dateDiagnosed(today)
                 .build();
 
         value = new HashMap<Date, Date>();
-        value.put(today,today);
-    }
 
+        value.put(patientCondition.getDateDiagnosed(),today);
+        //System.out.println(patientCondition.getPatientId().getPatientID());
+    }
     @Test
     public void testGetPatientCondition() throws Exception {
-        PatientCondition patientConditionObject = PatientConditionFactory.getPatientCondition(value,condition,patient);
-        //System.out.print(patient.getPatientID());
-        //System.out.println(patientCondition.getPatientId());
-        assertEquals("BFL933827",patientConditionObject.getConditionId().getConditionId());
-        //System.out.println(patientConditionObject.getConditionId().getConditionId());
-    }
 
+        PatientCondition patientConditionObject = PatientConditionFactory.getPatientCondition(value,condition,patient);
+        assertEquals("Aubrey",patientConditionObject.getPatientId().getPatientName());
+    }
 }

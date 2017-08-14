@@ -7,7 +7,9 @@ import PharmacyProject.co.za.domains.Prescriptionline;
  */
 public interface PrescriptionLineRepository {
     Prescriptionline create(Prescriptionline prescriptionline);
-    Prescriptionline read(int prescriptionId);
+    Prescriptionline read(int lineID);
     Prescriptionline update(Prescriptionline prescriptionline);
-    void delete(int prescriptionId);
+    double taxDue();
+    double prescriptionTotal(int quantity);
+    void delete(int lineID);
 }

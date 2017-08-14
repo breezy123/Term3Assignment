@@ -9,6 +9,7 @@ import PharmacyProject.co.za.services.PrescriptionLineService;
  */
 public class PrescriptionLineServiceImpl implements PrescriptionLineService {
 
+    private Prescriptionline prescriptionlineObj = new Prescriptionline();
     static PrescriptionLineRepository repository = PrescriptionLineRepositoryImpl.getInstance();
 
     public static PrescriptionLineRepositoryImpl getInstance(){
@@ -30,6 +31,13 @@ public class PrescriptionLineServiceImpl implements PrescriptionLineService {
        return  repository.update(prescriptionline);
     }
 
+    public double taxDue(){
+        return 0.14;
+    }
+    public double prescriptionTotal(int qauntity){
+
+        return (prescriptionlineObj.getPrice() * qauntity * taxDue()) + prescriptionlineObj.getPrice() * qauntity;
+    }
     public void delete(int prescriptionId) {
             repository.delete(prescriptionId);
     }

@@ -32,13 +32,15 @@ public class PharmacistRepositoryTest {
     @Test
     public void testCreate() throws Exception {
         Pharmacist pharmacist = PharmacistFactory.getPharmacist(value);
+        repository.create(pharmacist);
         assertEquals("MTL7263",pharmacist.getPharmacistID());
     }
 
     @Test(dependsOnMethods = "testCreate")
     public void testRead() throws Exception {
-        Pharmacist pharmacist1 = repository.read("");
-        assertEquals("MTL7263",pharmacist1.getPharmacistID());
+        Pharmacist pharmacist1 = repository.read("MTL7263");
+        System.out.println(pharmacist1.getPharmacistID());
+        assertEquals("PHD In Medicine",pharmacist1.getQualification());
     }
 
     @Test(dependsOnMethods = "testRead")

@@ -21,12 +21,13 @@ public class PrescriptionLineFactoryTest {
     Date today = new Date();
     Medicine medicine;
     Prescriptionline prescription2;
-
+    Prescriptionline prescriptionline1;
     //PrescriptionLineRepository repository;
 
     @BeforeMethod
     public void setUp() throws Exception {
 
+        prescriptionline1 = new Prescriptionline();
 
         patient = new Patient.Builder()
                 .patientId("ABY7382")
@@ -34,7 +35,6 @@ public class PrescriptionLineFactoryTest {
                 .medicalaidNumber("DCY8393")
                 .medicalaidName("Discovery")
                 .build();
-
 
         pharmacist = new Pharmacist.Builder()
                 .pharmacistID("124TRQF")
@@ -65,14 +65,14 @@ public class PrescriptionLineFactoryTest {
                 .build();
 
         value = new HashMap<Integer, Integer>();
-        value.put(prescription2.getLineId(),4144);
+        value.put(prescriptionline1.getLineId(),4144);
 
     }
 
     @Test
     public void testGetPrescriptionLine() throws Exception {
-        Prescriptionline prescriptionline = PrescriptionLineFactory.getPrescriptionLine(value,prescription,"Once a day",
-                medicine,139.89);
+        Prescriptionline prescriptionline = PrescriptionLineFactory.getPrescriptionLine(value,prescription,
+                "once a day",medicine,139.99);
         assertEquals("PND39837",prescriptionline.getMedicineID().getMedicineID());
     }
 

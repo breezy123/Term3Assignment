@@ -9,5 +9,7 @@ public interface PrescriptionLineService {
     Prescriptionline create(Prescriptionline prescriptionline);
     Prescriptionline read(int prescriptionId);
     Prescriptionline update(Prescriptionline prescriptionline);
+    double taxDue();
+    double prescriptionTotal(int quantity);
     void delete(int prescriptionId);
 }

@@ -24,7 +24,7 @@ public class PatientConditionServiceImpl implements PatientConditionService {
         return repository.create(patientCondition);
     }
 
-    public PatientCondition read(Patient patientId) {
+    public PatientCondition read(String patientId) {
         return repository.read(patientId);
     }
 
@@ -32,7 +32,7 @@ public class PatientConditionServiceImpl implements PatientConditionService {
         return  repository.update(patientCondition);
     }
 
-    public void delete(Patient patientId) {
+    public void delete(String patientId) {
         repository.delete(patientId);
     }
 }

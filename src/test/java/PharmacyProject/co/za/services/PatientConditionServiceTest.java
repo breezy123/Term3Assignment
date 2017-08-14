@@ -14,12 +14,11 @@ import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
-
 /**
  * Created by aubrey on 08/08/2017.
  */
 public class PatientConditionServiceTest {
-    Map<Date,Date> value;
+   Map<Date,Date> value;
     PatientConditionService service;
     Date today = new Date();
     Condition condition;
@@ -47,13 +46,13 @@ public class PatientConditionServiceTest {
                 .build();
 
         patientCondition = new PatientCondition.Builder()
-                .patientId(patient)
-                .conditionId(condition)
+                .patientIdentity(patient)
+                .conditionIdentity(condition)
                 .dateDiagnosed(today)
                 .build();
 
         value = new HashMap<Date, Date>();
-        value.put(today,today);
+        value.put(patientCondition.getDateDiagnosed(),today);
     }
 
     @Test
@@ -66,28 +65,28 @@ public class PatientConditionServiceTest {
 
     @Test(dependsOnMethods = "testCreate")
     public void testRead() throws Exception {
-        PatientCondition readpatient = service.read(patient);
+        PatientCondition readpatient = service.read(patientCondition.getPatientId().getPatientID());
         assertEquals("ABLW9828",readpatient.getPatientId().getPatientID());
     }
 
     @Test(dependsOnMethods = "testRead")
     public void testUpdate() throws Exception {
-        PatientCondition patientCondition = service.read(patient);
+        PatientCondition patientCondition1 = service.read(patientCondition.getPatientId().getPatientID());
         PatientCondition newPatientCondition = new PatientCondition.Builder()
-                .patientId(patient)
-                .conditionId(condition)
+                .patientIdentity(patient)
+                .conditionIdentity(condition)
                 .build();
 
         service.update(newPatientCondition);
-        PatientCondition UpdatePatientCondition =service.read(patient);
+        PatientCondition UpdatePatientCondition =service.read(patientCondition.getPatientId().getPatientID());
         assertEquals("BirdFlue",UpdatePatientCondition.getConditionId().getConditionName());
     }
 
     @Test(dependsOnMethods = "testUpdate")
     public void testDelete() throws Exception {
-        service.delete(patient);
-        PatientCondition patientCondition = service.read(patient);
-        assertNull(patientCondition);
+        service.delete(patientCondition.getPatientId().getPatientID());
+        PatientCondition patientConditionObject = service.read(patientCondition.getPatientId().getPatientID());
+        assertNull(patientConditionObject);
     }
 
 }
